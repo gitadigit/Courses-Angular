@@ -1,0 +1,39 @@
+<mat-card class="mat-card">
+  <mat-card-title>All-Courses</mat-card-title>
+
+  <mat-card-content class="center-content">
+    <div class="filter-section">
+      <mat-form-field appearance="fill">
+        <mat-label>NameCourse</mat-label>
+        <input matInput type="text" id="name" formControlName="name" (change)="filterName($event)" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select id="categoryId" formControlName="categoryId" (change)="filterCategory($event)">
+          <mat-option value="">All</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <p *ngIf="selectedCategory">Selected Category: {{ selectedCategory?.id }} - {{ selectedCategory?.name }}</p>
+
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button (click)="filterCourses()">Filter</button>
+  </mat-card-actions>
+
+  <mat-card-content>
+    <div *ngFor="let c of filteredCourses" class="course-card">
+      <img src="{{ c.image }}">
+      <h4><strong>name:</strong> {{ c.name }}</h4>
+      <h4><strong>amountLesson:</strong> {{ c.amountLesson }} hours</h4>
+      <mat-icon><strong>wayLearning:</strong> {{ c.wayLearning | icon }}</mat-icon>
+      <button mat-button (click)="detailCourse(c)">Details</button>
+    </div>
+  </mat-card-content>
+</mat-card>

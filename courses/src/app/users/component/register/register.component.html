@@ -1,0 +1,53 @@
+<div class="circle">
+  <div class="card">
+    <h2 class="card-title">Register</h2>
+
+    <form [formGroup]="registerForm" class="card-body">
+      <div class="form-group">
+        <label for="name">Username:</label>
+        <input type="text" id="name" formControlName="name" />
+        <ng-container *ngIf="registerForm.controls['name'].errors">
+          <div *ngIf="registerForm.controls['name'].errors['required']" class="invalid-feedback">This field is required
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password" />
+        <ng-container *ngIf="registerForm.controls['password'].errors">
+          <div *ngIf="registerForm.controls['password'].errors['required']" class="invalid-feedback">This field is
+            required</div>
+          <div *ngIf="registerForm.controls['password'].errors['minlength']" class="invalid-feedback">This field must be
+            4 chars</div>
+        </ng-container>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" />
+        <ng-container *ngIf="registerForm.controls['email'].errors">
+          <div *ngIf="registerForm.controls['email'].errors['required']" class="invalid-feedback">This field is required
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <input type="text" id="address" formControlName="address" />
+        <ng-container *ngIf="registerForm.controls['address'].errors">
+          <div *ngIf="registerForm.controls['address'].errors['required']" class="invalid-feedback">This field is
+            required</div>
+        </ng-container>
+      </div>
+
+      <div>
+        <button (click)="onRegister()" [disabled]="!registerForm.valid" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+
+    <div *ngIf="errorMessage2" class="error-message">
+      {{ errorMessage2 }}
+    </div>
+  </div>
+</div>

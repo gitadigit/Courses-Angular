@@ -1,0 +1,34 @@
+<h2>Details</h2>
+
+<div>
+    <h4>name:{{course?.name}}</h4>
+
+    <div *ngFor="let category of categories">
+        <div *ngIf="course?.categoryId === category.id">
+            <h4>category: {{category?.name}}</h4>
+        </div>
+    </div>
+
+    <h4>amountLesson:{{course?.amountLesson}}</h4>
+    <p [ngClass]="{'upcoming-week': isStartInNextWeek(course.startDate)}">Start Date: {{ course.startDate | date:'shortDate' }}</p>
+    <!-- <h4>StartDate: {{ course.startDate | date:'dd/MM/yyyy' }}</h4> -->
+    
+    <h4>syllabus: </h4>
+    <div *ngFor="let c of course.syllabus">
+        <h4> - {{c}}</h4>
+    </div>
+
+    <!-- <h4>lectuer: {{course?.lectuerId}}</h4> -->
+    <div *ngFor="let l of lecturesData">
+        {{l.name}}
+        <!-- <h1>zasdxfcgvhbjnkm:{{lectuer.id}}</h1> -->
+        <!-- <div *ngIf="course?.lectuerId === lectuer.id"> 
+            <h4>lectuer: {{lectuer?.name}}</h4>
+      </div> -->
+    </div>
+    <!-- <h4>WayLearning:{{course?.wayLearning|WayLearningPipe}}</h4> -->
+    <img src="{{course?.image}}">
+</div>
+<div *ngIf="isEdit === true">
+    <button (click)="editCoures(course)">Edit</button>
+</div>

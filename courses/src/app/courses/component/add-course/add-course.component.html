@@ -1,0 +1,112 @@
+<h2>Add Course</h2>
+
+<form [formGroup]="addCourseForm">
+  <div>
+    <label for="name">NameCourse :</label>
+    <input type="text" id="name" formControlName="name" />
+    <ng-container *ngIf="addCourseForm.controls['name'].errors" style="color: red;">
+      <div *ngIf="addCourseForm.controls['name'].errors['required']">This field is required</div>
+      <div *ngIf="addCourseForm.controls['name'].errors['minlength']">This field must be 3 chars</div>
+    </ng-container>
+  </div>
+
+  <div>
+    <label for="categoryId">category:</label>
+    <select id="categoryId" formControlName="categoryId" (change)="onSelectionCatogoryChanged($event)">
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{category.name}}
+      </option>
+    </select>
+    <ng-container *ngIf="addCourseForm.controls['categoryId'].errors">
+      <div *ngIf="addCourseForm.controls['categoryId'].errors['required']"style="color: red;">This field is required</div>
+    </ng-container>
+  </div>
+
+  <div>
+    <label for="amountLesson">AmountLesson:</label>
+    <input type="number" id="amountLesson" formControlName="amountLesson" />
+    <ng-container *ngIf="addCourseForm.controls['amountLesson'].errors">
+      <div *ngIf="addCourseForm.controls['amountLesson'].errors['required']"style="color: red;">This field is required</div>
+      <div *ngIf="addCourseForm.controls['amountLesson'].errors['pattern']"style="color: red;">nust be positive</div>
+    </ng-container>
+  </div>
+
+
+  <div>
+    <label for="startDate">StartDate:</label>
+    <input type="date" id="startDate" formControlName="startDate" />
+  </div>
+
+  <!-- <div>
+    <label for="WayLearning">WayLearning:</label>
+    <input type="number" id="WayLearning" formControlName="WayLearning" />
+    <ng-container *ngIf="addCourseForm.controls['WayLearning'].errors">
+      <div *ngIf="addCourseForm.controls['WayLearning'].errors['required']"style="color: red;">This field is required</div>
+    </ng-container>
+  </div> -->
+  <!-- <div>
+    <mat-label>WayLearning:</mat-label>
+    <mat-radio-group formControlName="addCourseForm">
+        <mat-radio-button [value]="0" [checked]="coursesEdit.WayLearning === 0">Frontal</mat-radio-button>
+        <mat-radio-button [value]="1" [checked]="coursesEdit.WayLearning === 1">Digital</mat-radio-button>
+    </mat-radio-group>
+</div> -->
+<div >
+  <label for="WayLearning">שיטת למידה:</label>
+  <select id="WayLearning" formControlName="addCourseForm">
+    <option value="1">Zoom</option>
+    <option value="0">Frontal</option>
+  </select>
+</div>
+
+
+  <div>
+    <label for="syllabus">Syllabus:</label>
+    <div *ngFor="let input of inputArray; let i = index">
+      <input
+        (change)="addInput(inputArrayControls[i], i)"
+        type="text"
+        [formControl]="inputArrayControls[i]"
+      />
+    </div>
+    <ng-container *ngIf="addCourseForm.controls['syllabus'].errors">
+      <div *ngIf="addCourseForm.controls['syllabus'].errors['required']"style="color: red;">This field is required</div>
+    </ng-container>
+  </div>
+
+  <div>
+    <label for="lectuerId">Lecturer:</label>
+    <select id="lectuerId" formControlName="lectuerId" (change)="onSelectionChanged($event)">
+      <option *ngFor="let l of lectuers" [value]="l.id">
+        {{l.name}}
+      </option>
+    </select>
+    <ng-container *ngIf="addCourseForm.controls['lectuerId'].errors">
+      <div *ngIf="addCourseForm.controls['lectuerId'].errors['required']"style="color: red;">This field is required</div>
+    </ng-container>
+  </div>
+
+  <div>
+    <label for="image">Image:</label>
+    <input type="text" id="image" formControlName="image" />
+    <ng-container *ngIf="addCourseForm.controls['image'].errors" >
+      <div *ngIf="addCourseForm.controls['image'].errors['required'] "style="color: red;">This field is required</div>
+    </ng-container>
+  </div>
+
+<div *ngIf="editId === undefined">
+    <div>
+        <button (click)="addCourse()" [disabled]="!addCourseForm.valid">Save1</button>
+    </div>
+</div>
+
+  <div *ngIf="editId !== null && editId !== undefined">
+    <div>
+        <button (click)="saveCourse()"[disabled]="!addCourseForm.valid">Save2</button>
+    </div>
+    <div>
+        <button (click)="cancelCourse()" >Cancel</button>
+    </div>
+</div>
+
+</form>

@@ -1,0 +1,76 @@
+.card {
+    // text-align: center;
+    width: 400px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.invalid-feedback {
+    color: red;
+    margin-top: 5px;
+}
+
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+
+.btn-primary {
+    text-align: c;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+.btn-success {
+
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    //   display: inline-block; /* עבור לסוג תצוגה בלוק כדי שנוכל להשתמש ב- margin: 0 auto; */
+    //   margin: 20
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
