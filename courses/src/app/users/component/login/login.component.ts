@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,7 +10,6 @@ import { CoursesService } from '../../../courses/courses.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-
 export class LoginComponent implements OnInit {
   
   showInput = false;
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   public courses: any[] = [];
   public lecturs: any[] = [];
   public matchingUser:any
-  public isLecture:boolean=false
+  public isLecture!:boolean
   public errorMessage: string | null = null;
   public isUser!:boolean
   public isLectur:boolean=true
@@ -33,17 +33,18 @@ export class LoginComponent implements OnInit {
        'course' : new FormControl('')
     })
   }
-
   public getCourses() {
+    console.log("getcourse")
     this._courseServise.getCoursesFromServer()
       .subscribe(response => {
         this.courses = response; 
+        console.log("courseget",this.courses)
       }, error => {
         console.error('Error fetching users:', error);
       });
   }
-
   public getUsers() {
+    console.log("get")
     this._userService.getUsersFromServer()
       .subscribe(response => {
         this.users = response; 
@@ -52,16 +53,13 @@ export class LoginComponent implements OnInit {
         console.error('Error fetching users:', error);
       });
   }
-
   public getLectures() {
-    console.log("getLecture")
-    this._userService.getLecturerFromServer()
+    this._userService.getLecturesFromServer()
       .subscribe(response => {
         sessionStorage.setItem("lecturs",JSON.stringify(response))
         const lecturesData =sessionStorage.getItem("lecturs"); 
         if (lecturesData !== null) {
           this.lecturs = JSON.parse(lecturesData);
-          console.log(this.lecturs, "llll");
           this.showInput = true;
           this.checkUserCredentials(this.lecturs); 
         } else {
@@ -85,8 +83,6 @@ export class LoginComponent implements OnInit {
   
   public checkUserCredentials(list:any[]) {
     this.isLectur==true
-    console.log(this.isUser,"user")
-    console.log(list,"list")
 
     const enteredUsername = this.loginForm.get('username')?.value;
     const enteredPassword = this.loginForm.get('password')?.value;
@@ -94,9 +90,7 @@ export class LoginComponent implements OnInit {
     if (this.matchingUser) {
       
       if (this.matchingUser.password === enteredPassword && this.isUser===true) {
-        console.log('User found:', this.matchingUser,"1");
         sessionStorage.setItem("user",JSON.stringify(this.matchingUser))
-        console.log("sesse",sessionStorage.getItem("user"))
         this.router.navigate(['course/all-courses'])
        } 
        
@@ -104,16 +98,16 @@ export class LoginComponent implements OnInit {
       {
         this.showInput=true
         this.getCourses()
-     //   this.router.navigate(['course/all-courses'])
+        
       }
       else {
-        console.log('Incorrect password');
+
         this.errorMessage = 'Incorrect password. Please try again.';
         this.isLectur=false
        }
     } 
     else {
-      console.log("jjj",this.matchingUser)
+
       alert( 'Incorrect username and password. Please try again.');
       console.log('User not found 2');
       this.router.navigate(['user/register',enteredUsername]);

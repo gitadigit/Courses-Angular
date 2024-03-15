@@ -1,7 +1,8 @@
 import { Component, OnInit, LOCALE_ID } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../../courses.service';
-import { Course, WayLearning } from '../../course.model';
+import { WayLearning } from '../../course.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-course-details',
@@ -16,7 +17,7 @@ export class CourseDetailsComponent implements OnInit {
   public categories!: any[];
   public lectuers!: any[];
   public currentLecture!: any
-  public lecturesData!: any
+  currentDate = new Date();
 
   new: any;
   date: Date = new Date();
@@ -24,19 +25,20 @@ export class CourseDetailsComponent implements OnInit {
   isEdit = false;
   lectureId: any;
   learnType = WayLearning
-
+  lectur!:string;
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private _courseService: CoursesService,) { }
 
   ngOnInit(): void {
 
-    const isLecture = sessionStorage.getItem("lector")
+    
     this.activatedRoute.params.subscribe((params) => {
       this.editId = params['id'];
       this.coursesId = params['id'];
       this.lectureId = params['lectuerId'];
-      this.lecturesData = sessionStorage.getItem("lector");
-      if (this.lecturesData !== null) {
-        this.currentLecture = JSON.parse(this.lecturesData);
+      const lecturesData = sessionStorage.getItem("lector");
+      if (lecturesData !== null) {
+        this.currentLecture = JSON.parse(lecturesData);
+        this.lectur=this.currentLecture['name']
       }
       this.currentLecture = this.currentLecture['id']
       if (this.lectureId == this.currentLecture) {
@@ -51,24 +53,26 @@ export class CourseDetailsComponent implements OnInit {
           console.log(err);
         }
       })
-    });
+      
+      });
+      
     const categoriesData = sessionStorage.getItem("categories");
     if (categoriesData !== null) {
       this.categories = JSON.parse(categoriesData);
     }
+   
+
   }
-  public editCoures(course: Course) {
+  public editCoures(course: any) {
     this.router.navigate(['course/add-coures', course])
   }
-
-  isStartInNextWeek(startDate: any): boolean {
-    if (!(startDate instanceof Date)) {
-      startDate = new Date(startDate);
-    }
+  isDateWithinWeek(startDate: Date): boolean {
     const today = new Date();
-    const nextWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
-    const isNextWeek = startDate.getTime() >= today && startDate.getTime() <= nextWeek;
-    return isNextWeek;
+    const oneWeek = new Date();
+    oneWeek.setDate(oneWeek.getDate() + 7);
+    return startDate <= oneWeek && startDate >= today;
   }
+
+
 
 }

@@ -10,17 +10,13 @@ const UserRoutes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"logout",component:LogoutComponent},
 
-
 ]
 
 @NgModule({
   declarations: [],
-
   imports: [
     RouterModule.forChild(UserRoutes)
   ],
-
   exports: [RouterModule]
-  
 })
 export class UsersRoutingModule { }

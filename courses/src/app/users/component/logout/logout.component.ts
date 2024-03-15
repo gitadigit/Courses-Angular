@@ -4,8 +4,10 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-logout',
+  // standalone: true,
+  // imports: [],
   templateUrl: './logout.component.html',
-  styleUrl: './logout.component.scss'
+  
 })
 export class LogoutComponent implements OnInit {
 
@@ -15,6 +17,7 @@ export class LogoutComponent implements OnInit {
 
     Swal.fire({
       title: "Are you sure you want to logut?",
+      //text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -24,18 +27,26 @@ export class LogoutComponent implements OnInit {
       if (result.isConfirmed) {
         Swal.fire({
           title: "GoodBy🖐! ",
+          // text: "Your file has been deleted.",
           icon: "success"
         });
         sessionStorage.setItem("user","")
+        sessionStorage.setItem("lector","")
         this.router.navigate(['home'])
+        
       }
       else {
         Swal.fire({
           title: "Cancellation 👍 ",
+          // text: "Deletion process cancelled.",
           icon: "success"
         }
     )
     this.router.navigate(['course/all-courses'])
   };
+  
+
   })}
+
+
 }

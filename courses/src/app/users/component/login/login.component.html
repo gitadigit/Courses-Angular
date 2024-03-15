@@ -1,16 +1,58 @@
+<!-- <h2>Login</h2>
+
+<form [formGroup]="loginForm">
+  <div class="example-container">
+    <mat-form-field>
+      <mat-label>User Name</mat-label>
+      <input matInput type="text" id="username" formControlName="username" />
+    </mat-form-field>
+    <ng-container *ngIf="loginForm.controls['username'].errors">
+      <div *ngIf="loginForm.controls['username'].errors['required']">This field is required
+      </div>
+      <div *ngIf="loginForm.controls['username'].errors['minlength']">This field must be at least 2 characters long
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="example-container">
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" id="password" formControlName="password" />
+    </mat-form-field>
+    <ng-container *ngIf="loginForm.controls['password'].errors">
+      <div *ngIf="loginForm.controls['password'].errors['required']">This field is required
+      </div>
+      <div *ngIf="loginForm.controls['password'].errors['minlength']">This field must be at least 4 characters long
+      </div>
+    </ng-container>
+  </div>
+
+  <div *ngIf="showInput">
+    <label for="course">Courses:</label>
+    <select id="course" formControlName="course" (change)="onSelectionCategoryChanged($event)">
+      <option *ngFor="let course of courses" [value]="course.name">{{course.name}}</option>
+    </select>
+  </div>
+
+  <button (click)="onLecture()">Lecturer Login</button>
+  <div>
+    <button (click)="onLogin()">Save</button>
+  </div>
+</form>
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div> -->
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">Login</h5>
-
+    
     <form [formGroup]="loginForm">
       <div class="form-group">
         <label for="username">Username:</label>
         <input type="text" id="username" formControlName="username" class="form-control" />
         <ng-container *ngIf="loginForm.controls['username'].errors">
-          <div *ngIf="loginForm.controls['username'].errors['required']" class="invalid-feedback">This field is required
-          </div>
-          <div *ngIf="loginForm.controls['username'].errors['minlength']" class="invalid-feedback">This field must be at
-            least 2 chars</div>
+          <div *ngIf="loginForm.controls['username'].errors['required']" class="invalid-feedback">This field is required</div>
+          <div *ngIf="loginForm.controls['username'].errors['minlength']" class="invalid-feedback">This field must be at least 2 chars</div>
         </ng-container>
       </div>
 
@@ -18,10 +60,8 @@
         <label for="password">Password:</label>
         <input type="password" id="password" formControlName="password" class="form-control" />
         <ng-container *ngIf="loginForm.controls['password'].errors">
-          <div *ngIf="loginForm.controls['password'].errors['required']" class="invalid-feedback">This field is required
-          </div>
-          <div *ngIf="loginForm.controls['password'].errors['minlength']" class="invalid-feedback">This field must be 4
-            chars</div>
+          <div *ngIf="loginForm.controls['password'].errors['required']" class="invalid-feedback">This field is required</div>
+          <div *ngIf="loginForm.controls['password'].errors['minlength']" class="invalid-feedback">This field must be 4 chars</div>
         </ng-container>
       </div>
 
@@ -32,7 +72,7 @@
         </select>
       </div>
 
-      <button (click)="onLecture()" class="btn btn-primary">Lecturer</button>
+      <button (click)="onLecture()" class="btn btn-primary">Lecturer entrance</button>
     </form>
 
     <div>

@@ -22,6 +22,15 @@
     </ng-container>
   </div>
 
+
+  <div >
+    <label for="WayLearning">WayLearning: </label>
+    <select id="WayLearning" formControlName="WayLearning" (change)="onSelectionWayLearningChanged($event)">
+      <option [value]="1">Zoom</option>
+      <option [value]="0">Frontal</option>
+    </select>
+  </div>
+
   <div>
     <label for="amountLesson">AmountLesson:</label>
     <input type="number" id="amountLesson" formControlName="amountLesson" />
@@ -34,30 +43,9 @@
 
   <div>
     <label for="startDate">StartDate:</label>
-    <input type="date" id="startDate" formControlName="startDate" />
-  </div>
-
-  <!-- <div>
-    <label for="WayLearning">WayLearning:</label>
-    <input type="number" id="WayLearning" formControlName="WayLearning" />
-    <ng-container *ngIf="addCourseForm.controls['WayLearning'].errors">
-      <div *ngIf="addCourseForm.controls['WayLearning'].errors['required']"style="color: red;">This field is required</div>
-    </ng-container>
-  </div> -->
-  <!-- <div>
-    <mat-label>WayLearning:</mat-label>
-    <mat-radio-group formControlName="addCourseForm">
-        <mat-radio-button [value]="0" [checked]="coursesEdit.WayLearning === 0">Frontal</mat-radio-button>
-        <mat-radio-button [value]="1" [checked]="coursesEdit.WayLearning === 1">Digital</mat-radio-button>
-    </mat-radio-group>
-</div> -->
-<div >
-  <label for="WayLearning">שיטת למידה:</label>
-  <select id="WayLearning" formControlName="addCourseForm">
-    <option value="1">Zoom</option>
-    <option value="0">Frontal</option>
-  </select>
+    <input type="date" id="startDate" formControlName="startDate" [min]="getCurrentDate()" />
 </div>
+
 
 
   <div>
@@ -94,15 +82,15 @@
     </ng-container>
   </div>
 
-<div *ngIf="editId === undefined">
+<div *ngIf="editId == undefined">
     <div>
-        <button (click)="addCourse()" [disabled]="!addCourseForm.valid">Save1</button>
+        <button (click)="addCourse()" [disabled]="!addCourseForm.valid">Save</button>
     </div>
 </div>
 
   <div *ngIf="editId !== null && editId !== undefined">
     <div>
-        <button (click)="saveCourse()"[disabled]="!addCourseForm.valid">Save2</button>
+        <button (click)="saveCourse()"[disabled]="!addCourseForm.valid">Save</button>
     </div>
     <div>
         <button (click)="cancelCourse()" >Cancel</button>
@@ -110,3 +98,4 @@
 </div>
 
 </form>
+

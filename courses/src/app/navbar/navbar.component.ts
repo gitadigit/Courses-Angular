@@ -21,7 +21,7 @@ export class NavbarComponent {
   }
   
   toLogout() {
-    this.router.navigate(['user/logout'])
+    this.router.navigate(['user/logout']); 
   }
 
   toAllCourses(){
@@ -32,10 +32,11 @@ export class NavbarComponent {
     this.router.navigate(['course/add-coures'])
   }
 
-  // private async onLogout() {
-  //   console.log("logout");
-  //   sessionStorage.setItem("user", "");
-  //   console.log("log-saa", sessionStorage.getItem("user"));
-  // }
+  private async onLogout() {
+    console.log("logout");
+    sessionStorage.setItem("user", "");
+    console.log("log-saa", sessionStorage.getItem("user"));
+  }
+
 
 }

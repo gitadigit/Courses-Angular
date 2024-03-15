@@ -1,12 +1,13 @@
 export class Course {
     id!: number;
     name!: string;
+    description!:string;
     categoryId!: number;
     amountLesson!: number;
-    StartDate!: Date;
+    startDate!: Date;
     syllabus!: string[];
     wayLearning!: WayLearning;
-    lectuerId!: number;
+    lecturerId!: number;
     image!: string;
 }
 export enum WayLearning {

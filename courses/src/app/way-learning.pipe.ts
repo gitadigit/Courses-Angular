@@ -4,13 +4,12 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'icon'
  
 })
-
 export class WayLearningPipe implements PipeTransform {
 
   transform(value: number): string {
+   
       if (value == 1)
           return "people"
       else return "desktop_windows"
   }
 }
-

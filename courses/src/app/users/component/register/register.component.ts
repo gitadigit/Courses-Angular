@@ -1,3 +1,4 @@
+
 import { Component,OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,15 +32,10 @@ export class RegisterComponent implements OnInit {
   }
 
   public getUser() {
-    this._userService.getUsersFromServer()
-      .subscribe(response => {
-        this.users = response;
-        this.checkuser();
-      },
-        error => {
-          console.error('enter fetching users:', error)
-        }
-      );
+    const userData =sessionStorage.getItem("user"); 
+    if (userData !== null) {
+      this.users = JSON.parse(userData);}
+      this.checkuser();
   }
 
   public postUser()
@@ -62,7 +58,9 @@ export class RegisterComponent implements OnInit {
   public checkuser() {
     const userName = this.registerForm.get('username')?.value;
     const userPassword = this.registerForm.get('password')?.value;
+
     let matchingUser = this.users.find(user => user.name === userName && user.password === userPassword)
+    
     if (matchingUser) {
       this.errorMessage2 = 'Enter another name or password,These variables exist.';
     }
